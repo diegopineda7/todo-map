@@ -13,10 +13,14 @@
     "gatsby-plugin-sharp": "^2.6.37",
     "gatsby-source-filesystem": "^2.3.31",
     "gatsby-transformer-sharp": "^2.5.16",
+    "google-map-react": "^2.1.6",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5",
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "prettier": "2.1.2"
