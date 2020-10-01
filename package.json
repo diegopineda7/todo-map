@@ -1,9 +1,10 @@
 {
   "name": "gatsby-starter-default",
+  "homepage": "https://diegopineda7.github.io/todo-map/",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "ToDo App with Map location",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Diego Pineda",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.31",
     "@fortawesome/free-solid-svg-icons": "^5.15.0",
@@ -26,6 +27,7 @@
     "redux-persist": "^6.0.0"
   },
   "devDependencies": {
+    "gh-pages": "^3.1.0",
     "prettier": "2.1.2"
   },
   "keywords": [
@@ -39,6 +41,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
+    "deploy": "gatsby build && gh-pages -d build",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "repository": {
