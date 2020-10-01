@@ -10,7 +10,7 @@ const ToDo = ({ todo }) => {
 
   const dispatch = useDispatch()
 
-  const done = todo => {
+  const done = () => {
     dispatch({
       type: 'DELETE',
       data: todo.id
@@ -40,6 +40,7 @@ const ToDo = ({ todo }) => {
       }
     })
     hideEditInput()
+    setNewName(newName)
   }
 
   return (
@@ -88,18 +89,10 @@ const ToDo = ({ todo }) => {
       <div style={{
         display: 'flex',
         alignItems: 'center',
-        gap: 25
+        gap: 15
       }}>
         <button onClick={showEditInput}>Edit</button>
-        <input
-          type='checkbox'
-          disabled={editing}
-          onChange={() => done(todo)}
-          style={{
-            width: 20,
-            height: 20
-          }}
-        />
+        <button onClick={done}>Done</button>
       </div>
     </div >
   )

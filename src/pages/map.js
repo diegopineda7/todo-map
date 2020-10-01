@@ -4,7 +4,7 @@ import SEO from "../components/seo"
 
 
 const MapPage = () => (
-  <Layout title='Map'>
+  <Layout titleAdd='Map'>
     <SEO title="Map" />
   </Layout>
 )
