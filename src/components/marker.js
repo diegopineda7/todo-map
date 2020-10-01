@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
 
-const Marker = ({ user, text, lat, lng }) => {
+const Marker = ({ user, todoName, text, lat, lng }) => {
   const showInfo = () => {
-    alert(`${text}: ${lat}, ${lng}`)
+    alert(`Todo "${todoName}" was ${text}\n Latitude: ${lat}, Longitude: ${lng}`)
   }
 
   return (

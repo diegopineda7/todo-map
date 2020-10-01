@@ -95,7 +95,7 @@ const ToDo = ({ todo, history }) => {
                 <button onClick={hideEditInput}>Cancel</button>
               </div>
             </form>
-            : `${name} - ${history} updates`
+            : name
         }
       </div>
       <div style={{

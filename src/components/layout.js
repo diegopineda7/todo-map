@@ -23,17 +23,16 @@ const DispatchComponent = ({ location }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    const setLocation = ({ lat, lng }) => {
+      dispatch({
+        type: 'LOCATION',
+        data: {
+          lat, lng
+        }
+      })
+    }
     setLocation(location)
   }, [])
-
-  const setLocation = ({ lat, lng }) => {
-    dispatch({
-      type: 'LOCATION',
-      data: {
-        lat, lng
-      }
-    })
-  }
 
   return <></>
 }
@@ -55,14 +54,17 @@ const Layout = ({ children, titleAdd, titleFull }) => {
   const persistor = persistStore(store)
 
   useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(res => {
-        setMyLocation({
-          lat: parseFloat(res.coords.latitude.toFixed(2)),
-          lng: parseFloat(res.coords.longitude.toFixed(2)),
+    const getLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(res => {
+          setMyLocation({
+            lat: parseFloat(res.coords.latitude.toFixed(2)),
+            lng: parseFloat(res.coords.longitude.toFixed(2)),
+          })
         })
-      })
+      }
     }
+    getLocation()
   }, [])
 
   const data = useStaticQuery(graphql`
@@ -78,11 +80,9 @@ const Layout = ({ children, titleAdd, titleFull }) => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-
         {
-          myLocation.lat !== undefined ?
-            <DispatchComponent location={myLocation} />
-            : 'nada here'
+          myLocation.lat !== undefined &&
+          <DispatchComponent location={myLocation} />
         }
         <Header siteTitle={titleFull || `${titleAdd} ${data.site.siteMetadata?.title}` || `Title`} />
         <div

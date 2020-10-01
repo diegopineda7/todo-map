@@ -4,7 +4,6 @@ import ToDo from './todo'
 
 const ToDoList = () => {
   const todos = useSelector(state => state.todos)
-  console.log(todos)
   const renderTodos = todos.filter(todo => !todo.done)
 
   return (
@@ -15,7 +14,7 @@ const ToDoList = () => {
             <ToDo
               todo={todo}
               key={todo.id}
-              histoty={todo.history.length}
+              history={todo.history.length}
             />
           ))
           : <h2>You have no ToDo's.</h2>

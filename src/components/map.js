@@ -18,8 +18,10 @@ const Map = ({ myPosition }) => {
       /> */}
       {
         todos.map(todo => (
-          todo.history.map(({ text, lat, lng }) => (
+          todo.history.map(({ text, lat, lng }, index) => (
             <Marker
+              key={index}
+              todoName={todo.name}
               text={text}
               lat={lat}
               lng={lng}

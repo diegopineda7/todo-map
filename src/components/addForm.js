@@ -10,7 +10,10 @@ const AddForm = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    inputRef.current.focus()
+    const focusInput = () => {
+      inputRef.current.focus()
+    }
+    focusInput()
   }, [])
 
   const handleChange = e => {

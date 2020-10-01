@@ -1,8 +1,7 @@
 
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 import Layout from "../components/layout";
-import Map from '../components/map';
+import Map from "../components/map";
 import SEO from "../components/seo";
 
 const MapPage = () => {
@@ -11,23 +10,30 @@ const MapPage = () => {
     lng: undefined
   })
 
-  const DispatchComponent = ({ setMyPosition }) => {
-    const myPosition = useSelector(state => state.location)
-    setMyPosition(myPosition)
-
-    return <></>
-  }
+  useEffect(() => {
+    const getLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(res => {
+          setMyPosition({
+            lat: parseFloat(res.coords.latitude.toFixed(2)),
+            lng: parseFloat(res.coords.longitude.toFixed(2)),
+          })
+        })
+      }
+    }
+    getLocation()
+  }, [])
 
   return (
     <Layout titleAdd='Map'>
       <SEO title="Map" />
-      <DispatchComponent setMyPosition={setMyPosition} />
+      {/* { */}
+      {/* myPosition.lat !== undefined ? */}
       <div style={{ height: '70vh', width: '100%' }}>
-        {
-          myPosition.lat !== undefined &&
-          <Map myPosition={myPosition} />
-        }
+        <Map myPosition={myPosition} />
       </div>
+      {/* : 'No location' */}
+      {/* } */}
     </Layout>
   )
 }
