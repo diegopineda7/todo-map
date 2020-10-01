@@ -21,7 +21,10 @@ const AddForm = () => {
       type: 'ADD',
       data: {
         id: Math.ceil(Math.random() * 1000),
-        name: newTodo
+        name: newTodo,
+        // history: [
+        //   { text: 'Created', lat, lng }
+        // ]
       }
     })
     setNewTodo('')

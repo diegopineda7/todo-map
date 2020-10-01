@@ -1,5 +1,16 @@
 const initialState = {
-  todos: [{ id: 1, name: 'Gym' }]
+  location: { lat: 6.55, lng: -73.13 },
+  todos: [{
+    id: 1,
+    name: 'Gym',
+    history: [
+      { text: 'Created', lat: 6.55, lng: -73.13 }
+    ]
+  }]
+}
+
+const setLocation = ({ lat, lng }) => {
+  return { lat, lng }
 }
 
 const addToDo = (todos, newTodo) => {
@@ -20,6 +31,11 @@ const editToDo = (todos, { id, newName }) => {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'LOCATION':
+      return {
+        ...state,
+        location: setLocation(action.data)
+      }
     case 'ADD':
       return {
         ...state,
