@@ -1,7 +1,7 @@
 import React, { createRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-const ToDo = ({ todo, history }) => {
+const ToDo = ({ todo }) => {
   const { id, name } = todo
   const [editing, setEditing] = useState(false)
   const [newName, setNewName] = useState(name)
@@ -19,7 +19,7 @@ const ToDo = ({ todo, history }) => {
         id,
         newName,
         update: {
-          text: 'Edited',
+          text: 'modified',
           lat: myPosition.lat,
           lng: myPosition.lng
         }
@@ -35,7 +35,7 @@ const ToDo = ({ todo, history }) => {
       data: {
         id: todo.id,
         update: {
-          text: 'Task done (deleted)',
+          text: 'completed',
           lat: myPosition.lat,
           lng: myPosition.lng
         }
@@ -54,6 +54,13 @@ const ToDo = ({ todo, history }) => {
 
   const handleChange = e => {
     setNewName(e.target.value)
+  }
+
+  const buttonStyle = {
+    backgroundColor: '#fff',
+    border: 'none',
+    borderRadius: 15,
+    padding: 8
   }
 
   return (
@@ -91,8 +98,18 @@ const ToDo = ({ todo, history }) => {
                 display: 'flex',
                 gap: 15
               }}>
-                <button type='submit'>Save</button>
-                <button onClick={hideEditInput}>Cancel</button>
+                <button
+                  type='submit'
+                  style={buttonStyle}
+                >
+                  Save
+                  </button>
+                <button
+                  onClick={hideEditInput}
+                  style={buttonStyle}
+                >
+                  Cancel
+                  </button>
               </div>
             </form>
             : name
@@ -103,8 +120,18 @@ const ToDo = ({ todo, history }) => {
         alignItems: 'center',
         gap: 15
       }}>
-        <button onClick={showEditInput}>Edit</button>
-        <button onClick={done}>Done</button>
+        <button
+          onClick={showEditInput}
+          style={buttonStyle}
+        >
+          Edit
+          </button>
+        <button
+          onClick={done}
+          style={buttonStyle}
+        >
+          Done
+          </button>
       </div>
     </div >
   )

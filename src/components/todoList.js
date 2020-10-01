@@ -14,7 +14,6 @@ const ToDoList = () => {
             <ToDo
               todo={todo}
               key={todo.id}
-              history={todo.history.length}
             />
           ))
           : <h2>You have no ToDo's.</h2>

@@ -58,8 +58,8 @@ const Layout = ({ children, titleAdd, titleFull }) => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(res => {
           setMyLocation({
-            lat: parseFloat(res.coords.latitude.toFixed(2)),
-            lng: parseFloat(res.coords.longitude.toFixed(2)),
+            lat: parseFloat(res.coords.latitude.toFixed(3)),
+            lng: parseFloat(res.coords.longitude.toFixed(3)),
           })
         })
       }

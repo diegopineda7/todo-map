@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
 
-const Marker = ({ user, todoName, text, lat, lng }) => {
+const Marker = ({ todoName, text, lat, lng, setMarkerInfo }) => {
   const showInfo = () => {
-    alert(`Todo "${todoName}" was ${text}\n Latitude: ${lat}, Longitude: ${lng}`)
+    setMarkerInfo(`Todo "${todoName}" was ${text}. Latitude: ${lat}, Longitude: ${lng}`)
   }
 
   return (
@@ -13,8 +13,8 @@ const Marker = ({ user, todoName, text, lat, lng }) => {
       <FontAwesomeIcon
         icon={faMapMarkerAlt}
         style={{
-          color: user ? 'blue' : 'red',
-          fontSize: user ? 45 : 30
+          color: 'red',
+          fontSize: 30
         }} />
     </div>
   )

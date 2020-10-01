@@ -28,7 +28,7 @@ const AddForm = () => {
         id: Math.ceil(Math.random() * 1000),
         name: newTodo,
         update: {
-          text: 'Created',
+          text: 'created',
           lat: myPosition.lat,
           lng: myPosition.lng
         }

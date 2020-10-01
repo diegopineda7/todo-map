@@ -1,5 +1,6 @@
-import React from 'react'
-import Tab from './tab'
+import { faMapMarked, faTasks } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
+import Tab from './tab';
 
 const BottomTabs = () => {
   return (
@@ -8,13 +9,13 @@ const BottomTabs = () => {
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundColor: 'red',
       textAlign: 'center',
       display: 'grid',
-      gridAutoFlow: 'column'
+      gridAutoFlow: 'column',
+      backgroundColor: 'darkblue'
     }}>
-      <Tab name='TodoApp' to='/' />
-      <Tab name='Map' to='/map' />
+      <Tab name="ToDo's" to='/' icon={faTasks} />
+      <Tab name='Map' to='/map' icon={faMapMarked} />
     </div>
   )
 }
