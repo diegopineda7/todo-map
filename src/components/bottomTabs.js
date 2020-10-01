@@ -14,7 +14,7 @@ const BottomTabs = () => {
       gridAutoFlow: 'column'
     }}>
       <Tab name='TodoApp' to='/' />
-      <Tab name='Map' to='/page-2' />
+      <Tab name='Map' to='/map' />
     </div>
   )
 }

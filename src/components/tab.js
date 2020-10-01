@@ -8,7 +8,8 @@ const Tab = ({ name, to }) => {
     }}>
       <button style={{
         padding: 15,
-        width: '100%'
+        width: '100%',
+        cursor: 'pointer'
       }}>
         {name}
       </button>
