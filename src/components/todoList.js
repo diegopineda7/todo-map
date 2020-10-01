@@ -4,6 +4,7 @@ import ToDo from './todo'
 
 const ToDoList = () => {
   const todos = useSelector(state => state.todos)
+  console.log(todos)
   const renderTodos = todos.filter(todo => !todo.done)
 
   return (

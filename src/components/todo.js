@@ -70,7 +70,6 @@ const ToDo = ({ todo, history }) => {
         {
           editing
             ? <form
-              hidden={!editing}
               onSubmit={editTodo}
               style={{
                 display: 'flex',

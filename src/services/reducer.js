@@ -1,11 +1,13 @@
 const initialState = {
   location: { lat: undefined, lng: undefined },
-  todos: [{
-    id: 1,
-    name: 'Gym',
-    done: false,
-    history: []
-  }]
+  todos: [
+    // {
+    // id: 1,
+    // name: 'Gym',
+    // done: false,
+    // history: []
+    // }
+  ]
 }
 
 const setLocation = ({ lat, lng }) => {
