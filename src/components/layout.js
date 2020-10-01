@@ -8,7 +8,7 @@
 import { graphql, useStaticQuery } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
-import { Provider } from "react-redux"
+import { Provider, useDispatch } from "react-redux"
 import { createStore } from "redux"
 import reducer from '../services/reducer'
 import BottomTabs from "./bottomTabs"
@@ -17,9 +17,21 @@ import "./layout.css"
 
 
 const store = createStore(reducer)
+const dispatch = useDispatch()
 
 const Layout = ({ children, titleAdd, titleFull }) => {
   titleAdd = titleAdd ? titleAdd + ' - ' : ''
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(res => {
+        setLocation({
+          lat: parseFloat(res.coords.latitude.toFixed(2)),
+          lng: parseFloat(res.coords.longitude.toFixed(2)),
+        })
+      })
+    }
+  }, [])
 
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -30,6 +42,15 @@ const Layout = ({ children, titleAdd, titleFull }) => {
       }
     }
   `)
+
+  const setLocation = ({ lat, lng }) => {
+    dispatch({
+      type: 'LOCATION',
+      data: {
+        lat, lng
+      }
+    })
+  }
 
   return (
     <Provider store={store}>

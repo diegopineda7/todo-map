@@ -1,5 +1,5 @@
 const initialState = {
-  location: { lat: 6.55, lng: -73.13 },
+  location: { lat: undefined, lng: undefined },
   todos: [{
     id: 1,
     name: 'Gym',
