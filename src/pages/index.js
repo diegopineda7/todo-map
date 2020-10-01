@@ -3,11 +3,18 @@ import React from "react"
 import Image from "../components/image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import ToDoList from "../components/todoList"
 
+
+const todos = [
+  { id: 1, name: 'Got to gym' },
+  { id: 2, name: 'Buy new book' },
+]
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
+    <ToDoList todos={todos} />
     <h1>Hi people</h1>
     <p>Welcome to your new Gatsby site.</p>
     <p>Now go build something great.</p>
