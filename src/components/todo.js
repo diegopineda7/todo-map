@@ -13,16 +13,23 @@ const ToDo = ({ todo }) => {
       marginBottom: 5,
       color: 'white',
       padding: 15,
-      borderRadius: 15
+      borderRadius: 15,
+      display: 'flex',
+      justifyContent: 'space-between'
     }}>
       <main>
         {id}. {name}
       </main>
-      <div>
-        <input type='checkbox' onChange={() => done(todo)} />
-      </div>
-      <div>
-        <button>Remove</button>
+      <div style={{
+        display: 'flex',
+        gap: 25
+      }}>
+        <div>
+          <input type='checkbox' onChange={() => done(todo)} />
+        </div>
+        <div>
+          <button>X</button>
+        </div>
       </div>
     </div>
   )

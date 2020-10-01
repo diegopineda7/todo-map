@@ -1,4 +1,5 @@
 import React from 'react'
+import Tab from './tab'
 
 const BottomTabs = () => {
   return (
@@ -8,9 +9,12 @@ const BottomTabs = () => {
       right: 0,
       bottom: 0,
       backgroundColor: 'red',
-      textAlign: 'center'
+      textAlign: 'center',
+      display: 'grid',
+      gridAutoFlow: 'column'
     }}>
-      Bottom Tabs
+      <Tab name='TodoApp' to='/' />
+      <Tab name='Map' to='/page-2' />
     </div>
   )
 }
