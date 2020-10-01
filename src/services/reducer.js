@@ -1,5 +1,5 @@
 const initialState = {
-  todos: []
+  todos: [{ id: 1, name: 'Gym' }]
 }
 
 const addToDo = (todos, newTodo) => {
@@ -10,7 +10,7 @@ const deleteToDo = (todos, id) => {
   return todos.filter(todo => todo.id !== id)
 }
 
-const editToDo = (todos, id, newName) => {
+const editToDo = (todos, { id, newName }) => {
   let todo = todos.filter(todo => todo.id === id)[0]
   let todoList = todos.filter(todo => todo.id !== id)
   todo.name = newName
@@ -23,19 +23,21 @@ const reducer = (state = initialState, action) => {
     case 'ADD':
       return {
         ...state,
-        todos: addToDo(state.todos, action.payload)
+        todos: addToDo(state.todos, action.data)
       }
     case 'DELETE':
       return {
         ...state,
-        todos: deleteToDo(state.todos, action.payload)
+        todos: deleteToDo(state.todos, action.data)
       }
     case 'EDIT':
       return {
         ...state,
-        todos: editToDo(state.todos, action.payload)
+        todos: editToDo(state.todos, action.data)
       }
     default:
       return state
   }
 }
+
+export default reducer

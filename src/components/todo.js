@@ -1,10 +1,45 @@
-import React from 'react'
+import React, { createRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 const ToDo = ({ todo }) => {
   const { id, name } = todo
+  const [editing, setEditing] = useState(false)
+  const [newName, setNewName] = useState(name)
 
-  const done = (todo) => {
-    alert(`Todo ${todo.name} done!`)
+  const inputRef = createRef()
+
+  const dispatch = useDispatch()
+
+  const done = todo => {
+    dispatch({
+      type: 'DELETE',
+      data: todo.id
+    })
+  }
+
+  const handleChange = e => {
+    setNewName(e.target.value)
+  }
+
+  const showEditInput = () => {
+    setEditing(true)
+  }
+
+  const hideEditInput = () => {
+    setEditing(false)
+    setNewName(name)
+  }
+
+  const editTodo = e => {
+    e.preventDefault()
+    dispatch({
+      type: 'EDIT',
+      data: {
+        id,
+        newName
+      }
+    })
+    hideEditInput()
   }
 
   return (
@@ -17,21 +52,56 @@ const ToDo = ({ todo }) => {
       display: 'flex',
       justifyContent: 'space-between'
     }}>
-      <main>
-        {id}. {name}
-      </main>
+      <div>
+        {
+          editing
+            ? <form
+              hidden={!editing}
+              onSubmit={editTodo}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 15
+              }}
+            >
+              <input
+                type='text'
+                value={newName}
+                ref={inputRef}
+                onChange={handleChange}
+                style={{
+                  padding: '5px 10px',
+                }}
+                required
+              />
+              <div style={{
+                display: 'flex',
+                gap: 15
+              }}>
+                <button type='submit'>Save</button>
+                <button onClick={hideEditInput}>Cancel</button>
+              </div>
+            </form>
+            : name
+        }
+      </div>
       <div style={{
         display: 'flex',
+        alignItems: 'center',
         gap: 25
       }}>
-        <div>
-          <input type='checkbox' onChange={() => done(todo)} />
-        </div>
-        <div>
-          <button>X</button>
-        </div>
+        <button onClick={showEditInput}>Edit</button>
+        <input
+          type='checkbox'
+          disabled={editing}
+          onChange={() => done(todo)}
+          style={{
+            width: 20,
+            height: 20
+          }}
+        />
       </div>
-    </div>
+    </div >
   )
 }
 
