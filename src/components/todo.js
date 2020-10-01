@@ -1,24 +1,46 @@
 import React, { createRef, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-const ToDo = ({ todo }) => {
+const ToDo = ({ todo, history }) => {
   const { id, name } = todo
   const [editing, setEditing] = useState(false)
   const [newName, setNewName] = useState(name)
+  const myPosition = useSelector(state => state.location)
 
   const inputRef = createRef()
 
   const dispatch = useDispatch()
 
-  const done = () => {
+  const editTodo = e => {
+    e.preventDefault()
     dispatch({
-      type: 'DELETE',
-      data: todo.id
+      type: 'EDIT',
+      data: {
+        id,
+        newName,
+        update: {
+          text: 'Edited',
+          lat: myPosition.lat,
+          lng: myPosition.lng
+        }
+      }
     })
+    hideEditInput()
+    setNewName(newName)
   }
 
-  const handleChange = e => {
-    setNewName(e.target.value)
+  const done = () => {
+    dispatch({
+      type: 'DONE',
+      data: {
+        id: todo.id,
+        update: {
+          text: 'Task done (deleted)',
+          lat: myPosition.lat,
+          lng: myPosition.lng
+        }
+      }
+    })
   }
 
   const showEditInput = () => {
@@ -30,17 +52,8 @@ const ToDo = ({ todo }) => {
     setNewName(name)
   }
 
-  const editTodo = e => {
-    e.preventDefault()
-    dispatch({
-      type: 'EDIT',
-      data: {
-        id,
-        newName
-      }
-    })
-    hideEditInput()
-    setNewName(newName)
+  const handleChange = e => {
+    setNewName(e.target.value)
   }
 
   return (
@@ -83,7 +96,7 @@ const ToDo = ({ todo }) => {
                 <button onClick={hideEditInput}>Cancel</button>
               </div>
             </form>
-            : name
+            : `${name} - ${history} updates`
         }
       </div>
       <div style={{

@@ -4,15 +4,17 @@ import ToDo from './todo'
 
 const ToDoList = () => {
   const todos = useSelector(state => state.todos)
+  const renderTodos = todos.filter(todo => !todo.done)
 
   return (
     <div>
       {
-        todos.length
-          ? todos.map(todo => (
+        renderTodos.length
+          ? renderTodos.map(todo => (
             <ToDo
               todo={todo}
               key={todo.id}
+              histoty={todo.history.length}
             />
           ))
           : <h2>You have no ToDo's.</h2>

@@ -3,9 +3,8 @@ const initialState = {
   todos: [{
     id: 1,
     name: 'Gym',
-    history: [
-      { text: 'Created', lat: 6.55, lng: -73.13 }
-    ]
+    done: false,
+    history: []
   }]
 }
 
@@ -13,18 +12,31 @@ const setLocation = ({ lat, lng }) => {
   return { lat, lng }
 }
 
-const addToDo = (todos, newTodo) => {
+const addToDo = (todos, { id, name, update }) => {
+  const newTodo = {
+    id,
+    name,
+    history: [
+      { ...update }
+    ]
+  }
   return [...todos, newTodo]
 }
 
-const deleteToDo = (todos, id) => {
-  return todos.filter(todo => todo.id !== id)
+const doneToDo = (todos, { id, update }) => {
+  let todo = todos.filter(todo => todo.id === id)[0]
+  let todoList = todos.filter(todo => todo.id !== id)
+  todo.done = true
+  todo.history.push({ ...update })
+
+  return [...todoList, todo]
 }
 
-const editToDo = (todos, { id, newName }) => {
+const editToDo = (todos, { id, newName, update }) => {
   let todo = todos.filter(todo => todo.id === id)[0]
   let todoList = todos.filter(todo => todo.id !== id)
   todo.name = newName
+  todo.history.push({ ...update })
 
   return [...todoList, todo]
 }
@@ -41,10 +53,10 @@ const reducer = (state = initialState, action) => {
         ...state,
         todos: addToDo(state.todos, action.data)
       }
-    case 'DELETE':
+    case 'DONE':
       return {
         ...state,
-        todos: deleteToDo(state.todos, action.data)
+        todos: doneToDo(state.todos, action.data)
       }
     case 'EDIT':
       return {

@@ -1,9 +1,11 @@
 import React, { createRef, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const AddForm = () => {
   const [newTodo, setNewTodo] = useState()
   const inputRef = createRef()
+
+  const myPosition = useSelector(state => state.location)
 
   const dispatch = useDispatch()
 
@@ -22,9 +24,11 @@ const AddForm = () => {
       data: {
         id: Math.ceil(Math.random() * 1000),
         name: newTodo,
-        // history: [
-        //   { text: 'Created', lat, lng }
-        // ]
+        update: {
+          text: 'Created',
+          lat: myPosition.lat,
+          lng: myPosition.lng
+        }
       }
     })
     setNewTodo('')
